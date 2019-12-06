@@ -1,18 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Course, type: :model do
-
-  describe 'validations' do
-    it {should validate_presence_of :name}
-  end
-
-  describe 'relationships' do
-    it {should have_many :student_courses}
-    it {should have_many(:students).through(:student_courses)}
-  end
-
-  describe 'methods' do
-    it "can count how many students it has" do
+RSpec.describe "As a visitor" do
+  describe "when I visit the courses index page" do
+    it "I see a list of courses and the number of students enrolled in that course" do
       student_1 = Student.create!(name: "Casseopia Black",
                                   age: 14,
                                   house: "Slytherin")
@@ -30,14 +20,25 @@ RSpec.describe Course, type: :model do
                                   house: "Slytherin")
 
       course_1 = Course.create!(name: "Defense Against the Dark Arts")
+      course_2 = Course.create!(name: "Herbology")
+      course_3 = Course.create!(name: "Potions")
 
       student_1.courses << course_1
+      student_1.courses << course_2
+      student_1.courses << course_3
+
       student_2.courses << course_1
+
       student_3.courses << course_1
+      student_3.courses << course_2
+
       student_4.courses << course_1
 
-      expect(course_1.number_of_students).to eq(4)
+      visit '/courses'
+
+      expect(page).to have_content("#{course_1.name}: 4")
+      expect(page).to have_content("#{course_2.name}: 2")
+      expect(page).to have_content("#{course_3.name}: 1")
     end
   end
-
 end
