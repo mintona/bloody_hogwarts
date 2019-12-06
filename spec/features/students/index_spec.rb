@@ -42,7 +42,7 @@ RSpec.describe "As a visitor" do
                                   house: "Slytherin")
 
       visit "/students"
-save_and_open_page
+
       expect(page).to have_content("Average Age: 13.5")
     end
   end
