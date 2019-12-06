@@ -13,7 +13,7 @@ RSpec.describe "As a visitor" do
                                     house: "Gryffindor")
 
         visit '/students'
-save_and_open_page
+
         expect(page).to have_content(student_1.name)
         expect(page).to have_content(student_1.age)
         expect(page).to have_content(student_1.house)
