@@ -38,6 +38,13 @@ RSpec.describe Course, type: :model do
 
       expect(course_1.number_of_students).to eq(4)
     end
+
+    # I was just starting this when time was up, which is why it's commented out.
+    # xit "can sort courses in alphabetical order" do
+    #   course_1 = Course.create!(name: "Potions")
+    #   course_2 = Course.create!(name: "Defense Against the Dark Arts")
+    #   course_3 = Course.create!(name: "Herbology")
+    # end
   end
 
 end
